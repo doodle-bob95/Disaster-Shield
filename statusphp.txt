@@ -1,0 +1,52 @@
+<?php
+$backupDir = '/var/backups/disastershield';
+$latestBackup = '';
+
+if (is_dir($backupDir)) {
+    $files = scandir($backupDir, SCANDIR_SORT_DESCENDING);
+    
+    // Look for files with the .tar.gz extension (as your backup files are named)
+    foreach ($files as $file) {
+        if (pathinfo($file, PATHINFO_EXTENSION) === 'gz' && strpos($file, '.tar.gz') !== false) {
+            $latestBackup = $file;
+            break;
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DisasterShield - Backup Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 40px;
+            text-align: center;
+        }
+        .status-box {
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 20px 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .status-box h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-box">
+        <h2>🛡️ Latest Backup Status</h2>
+        <?php if ($latestBackup): ?>
+            <p><strong>Last Backup:</strong> <?= htmlspecialchars($latestBackup) ?></p>
+            <p><strong>Location:</strong> /var/backups/disastershield/</p>
+        <?php else: ?>
+            <p>No backups found yet.</p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>
