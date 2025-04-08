@@ -1,0 +1,10 @@
+<?php
+$logfile = '/var/www/html/status/backup.log';
+
+if (file_exists($logfile)) {
+    $log = file_get_contents($logfile);
+    echo "<h2>Backup Status</h2><pre>$log</pre>";
+} else {
+    echo "No status available.";
+}
+?>

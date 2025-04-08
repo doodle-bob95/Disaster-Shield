@@ -1,0 +1,10 @@
+<?php
+// Only allow access from your own site
+header("Access-Control-Allow-Origin: https://disastershield.xyz");
+
+// Execute the backup script
+$output = shell_exec("sudo /usr/local/bin/disastershield-backup.sh 2>&1");
+
+echo "<h1>Backup Triggered!</h1>";
+echo "<pre>$output</pre>";
+?>
