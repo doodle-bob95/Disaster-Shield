@@ -1,17 +1,23 @@
 <?php
 $backupDir = '/var/backups/disastershield';
 $latestBackup = '';
+$lastBackupTime = '';
 
+// Get latest .tar.gz backup filename
 if (is_dir($backupDir)) {
     $files = scandir($backupDir, SCANDIR_SORT_DESCENDING);
-    
-    // Look for files with the .tar.gz extension (as your backup files are named)
     foreach ($files as $file) {
         if (pathinfo($file, PATHINFO_EXTENSION) === 'gz' && strpos($file, '.tar.gz') !== false) {
             $latestBackup = $file;
             break;
         }
     }
+}
+
+// Get last readable timestamp from the text file
+$timestampFile = '/var/www/html/last_backup.txt';
+if (file_exists($timestampFile)) {
+    $lastBackupTime = file_get_contents($timestampFile);
 }
 ?>
 
@@ -42,10 +48,16 @@ if (is_dir($backupDir)) {
     <div class="status-box">
         <h2>🛡️ Latest Backup Status</h2>
         <?php if ($latestBackup): ?>
-            <p><strong>Last Backup:</strong> <?= htmlspecialchars($latestBackup) ?></p>
+            <p><strong>Backup File:</strong> <?= htmlspecialchars($latestBackup) ?></p>
             <p><strong>Location:</strong> /var/backups/disastershield/</p>
         <?php else: ?>
-            <p>No backups found yet.</p>
+            <p>No backup archive found.</p>
+        <?php endif; ?>
+
+        <?php if ($lastBackupTime): ?>
+            <p><strong><?= htmlspecialchars($lastBackupTime) ?></strong></p>
+        <?php else: ?>
+            <p>No backup timestamp recorded.</p>
         <?php endif; ?>
     </div>
 </body>
