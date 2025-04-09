@@ -9,7 +9,3 @@ DisasterShield is a cloud-based backup and disaster recovery system designed to 
 - Secure Storage: Encrypts and protects backup files from cyber threats.  
 - Custom WordPress Integration: A status page shows real-time backup details.  
 
-## Installation  
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/yourusername/DisasterShield.git
