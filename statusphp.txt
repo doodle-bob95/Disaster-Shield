@@ -47,7 +47,7 @@ if (file_exists($timestampFile)) {
 </head>
 <body>
     <div class="status-box">
-        <h2>🛡️ Latest Backup Status</h2>
+        <h2> Latest Backup Status</h2>
         <p><strong>Backup File:</strong> <?= htmlspecialchars($latestBackup) ?></p>
         <p><strong><?= htmlspecialchars($lastBackupTime) ?></strong></p>
     </div>
