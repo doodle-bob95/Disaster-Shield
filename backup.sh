@@ -1,23 +1,15 @@
 #!/bin/bash
 
-# Variables
+# Backup location
 BACKUP_DIR="/var/backups/disastershield"
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-BACKUP_FILE="$BACKUP_DIR/backup_$TIMESTAMP.tar.gz"
-MYSQL_USER="root"
-MYSQL_PASSWORD="your_mysql_password"
-DATABASE_NAME="wordpress_db"
+TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+BACKUP_FILE="backup_$(date +"%Y-%m-%d_%H-%M-%S").tar.gz"
 
 # Create backup directory if it doesn't exist
 mkdir -p "$BACKUP_DIR"
 
-# Backup website files
-tar -czf "$BACKUP_FILE" /var/www/html
+# What to back up (WordPress content)
+tar -czf "$BACKUP_DIR/$BACKUP_FILE" /var/www/html/wp-content
 
-# Backup database
-mysqldump -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$DATABASE_NAME" > "$BACKUP_DIR/db_backup_$TIMESTAMP.sql"
-
-# Cleanup old backups (older than 7 days)
-find "$BACKUP_DIR" -type f -mtime +7 -exec rm {} \;
-
-echo "Backup completed: $BACKUP_FILE"
+# Save the readable timestamp to a text file (for PHP to read)
+echo "Last backup created: $TIMESTAMP" > /var/www/html/last_backup.txt
