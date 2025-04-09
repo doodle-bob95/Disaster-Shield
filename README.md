@@ -1,11 +1,21 @@
-# DisasterShield - Disaster Recovery and Backup Solution
+# DisasterShield - Disaster Recovery and Backup Solution - Diya Vijay 35389338
  ICT171 Assignment 2
 
-DisasterShield is a cloud-based backup and disaster recovery system designed to automate backups, secure sensitive data, and ensure quick recovery from system failures.  
+**DisasterShield** is a cloud-based disaster recovery and backup solution built with WordPress and hosted on DigitalOcean.
 
-## Features:
-- Automated Backups: Backs up website files and databases at scheduled intervals.  
-- Disaster Recovery: Quick restoration from backup files.  
-- Secure Storage: Encrypts and protects backup files from cyber threats.  
-- Custom WordPress Integration: A status page shows real-time backup details.  
+## Live Site
+🔗 https://disastershield.xyz
 
+##Features
+- WordPress site installed from scratch
+- Shell script for daily and manual backups
+- Status page showing the latest backup timestamp
+- Trigger backup button on the website
+- SSL secured and fully hosted with a custom domain
+
+##Technologies Used
+- DigitalOcean (Ubuntu droplet)
+- Apache, MySQL, PHP
+- WordPress + Elementor
+- Shell scripting (backup, restore, cron)
+- Let's Encrypt SSL
